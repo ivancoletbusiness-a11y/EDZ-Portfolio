@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#faf9f7">
+  <meta name="description" content="Edz-Ryan Martin's student portfolio.">
+  <title>Edz-Ryan Martin | Student Portfolio</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --red: #c83c35;
+      --red-dark: #a92e28;
+      --ink: #292725;
+      --muted: #716d68;
+      --background: #faf9f7;
+      --card: #fff;
+      --line: #e9e5e0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--background); color: var(--ink); line-height: 1.6; }
+    a { color: inherit; }
+    ::selection { background: #f0c5c1; }
+
+    .container { width: min(940px, calc(100% - 40px)); margin: 0 auto; }
+
+    .topbar {
+      display: flex;
+      min-height: 68px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      border-bottom: 1px solid var(--line);
+    }
+    .brand { color: var(--ink); font-size: .96rem; font-weight: 700; text-decoration: none; }
+    .brand span { color: var(--red); }
+    nav { display: flex; flex-wrap: wrap; gap: 22px; }
+    nav a { color: var(--muted); font-size: .85rem; text-decoration: none; }
+    nav a:hover, nav a:focus-visible { color: var(--red); }
+
+    .hero {
+      display: grid;
+      min-height: 400px;
+      grid-template-columns: 1.35fr .65fr;
+      align-items: center;
+      gap: 45px;
+      padding: 58px 0;
+    }
+    .hello { margin: 0 0 5px; color: var(--red); font-size: .9rem; font-weight: 700; }
+    h1 { margin: 0; font-size: clamp(2.5rem, 7vw, 4.2rem); letter-spacing: -.055em; line-height: 1.12; }
+    .course { margin: 13px 0 0; color: var(--muted); font-size: 1rem; }
+    .hero-copy > p:last-of-type { max-width: 470px; margin: 20px 0; }
+    .button {
+      display: inline-block;
+      padding: 10px 17px;
+      border-radius: 5px;
+      background: var(--red);
+      color: #fff;
+      font-size: .88rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background .2s ease, transform .2s ease;
+    }
+    .button:hover { transform: translateY(-2px); background: var(--red-dark); }
+
+    .photo-box {
+      position: relative;
+      display: grid;
+      width: min(100%, 235px);
+      aspect-ratio: 1;
+      justify-self: end;
+      place-items: center;
+      overflow: hidden;
+      border: 2px dashed #d8c8c5;
+      border-radius: 12px;
+      background: #f2e9e7;
+      color: var(--red);
+      cursor: pointer;
+      transition: border-color .2s ease, background .2s ease;
+    }
+    .photo-box:hover { border-color: var(--red); background: #f7eeec; }
+    .photo-box input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+    .photo-box img { display: none; width: 100%; height: 100%; object-fit: cover; }
+    .photo-box.has-image img { display: block; }
+    .photo-box.has-image .photo-prompt { display: none; }
+    .photo-prompt { text-align: center; }
+    .photo-prompt svg { display: block; width: 53px; height: 53px; margin: 0 auto 10px; }
+    .photo-prompt span { display: block; color: var(--muted); font-size: .8rem; }
+
+    section.content-section { padding: 39px 0; border-top: 1px solid var(--line); }
+    h2 { margin: 0 0 20px; font-size: 1.55rem; letter-spacing: -.025em; }
+    h2::after { display: block; width: 35px; height: 3px; margin-top: 7px; border-radius: 2px; background: var(--red); content: ""; }
+    .bio { max-width: 730px; margin: 0; color: #514d48; }
+
+    .education-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .education-item, .skill-item {
+      padding: 17px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: var(--card);
+    }
+    .education-item h3 { margin: 0 0 5px; font-size: .97rem; }
+    .education-item p { margin: 0; color: var(--muted); font-size: .86rem; }
+    .honors { display: inline-block; margin-top: 9px; color: var(--red-dark); font-size: .78rem; font-weight: 700; }
+    .skills-list { display: flex; flex-wrap: wrap; gap: 10px; }
+    .skill-item { min-width: 130px; padding: 10px 15px; font-size: .9rem; }
+
+    .contact-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px 25px; max-width: 650px; }
+    .contact-item { display: flex; flex-direction: column; }
+    .contact-item strong { font-size: .82rem; }
+    .contact-item a, .contact-item span { color: var(--muted); font-size: .9rem; text-decoration: none; }
+    .contact-item a:hover { color: var(--red); text-decoration: underline; }
+
+    footer { padding: 22px 0 30px; border-top: 1px solid var(--line); color: var(--muted); font-size: .8rem; }
+
+    .fade-in { animation: fade-in .55s ease both; }
+    @keyframes fade-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+    @media (max-width: 650px) {
+      .container { width: min(100% - 32px, 500px); }
+      .topbar { align-items: flex-start; flex-direction: column; justify-content: center; gap: 8px; padding: 14px 0; }
+      nav { gap: 15px; }
+      nav a { font-size: .8rem; }
+      .hero { min-height: 0; grid-template-columns: 1fr; gap: 26px; padding: 42px 0; }
+      .photo-box { width: min(100%, 190px); justify-self: start; }
+      .education-list { grid-template-columns: 1fr; }
+      .contact-list { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="container topbar fade-in">
+    <a class="brand" href="#home"><span>Edz-Ryan</span> Martin</a>
+    <nav aria-label="Main navigation">
+      <a href="#about">About</a>
+      <a href="#education">Education</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="container hero fade-in" id="home">
+      <div class="hero-copy">
+        <p class="hello">Hello, I'm</p>
+        <h1>Edz-Ryan Martin</h1>
+        <p class="course">BSIT 1A · University of the Cordillera</p>
+        <p>I’m a first-year IT student who enjoys learning about technology. I hope to build a career in cybersecurity while pursuing my interest in music.</p>
+        <a class="button" href="#about">More about me</a>
+      </div>
+      <label class="photo-box has-image" for="photo-upload">
+        <input id="photo-upload" type="file" accept="image/*" aria-label="Choose a profile photo">
+        <img id="photo-preview" src="edz.jpg" alt="Portrait of Edz-Ryan Martin">
+        <span class="photo-prompt">
+          <svg viewBox="0 0 64 64" aria-hidden="true">
+            <circle cx="32" cy="22" r="11" fill="none" stroke="currentColor" stroke-width="3"/>
+            <path d="M12 55c1-12 9-19 20-19s19 7 20 19" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+          <span>Click to add your photo</span>
+        </span>
+      </label>
+    </section>
+
+    <section class="container content-section" id="about">
+      <h2>About me</h2>
+      <p class="bio">I’m from Sta. Ines Centro, Sta. Ignacia, Tarlac, and I was born in Tarlac City. I’m currently studying Information Technology at the University of the Cordillera. I dream of pursuing music while studying, and I hope to become a cybersecurity professional.</p>
+    </section>
+
+    <section class="container content-section" id="education">
+      <h2>Education</h2>
+      <div class="education-list">
+        <article class="education-item">
+          <h3>Padapada National High School</h3>
+          <p>Junior High School</p>
+        </article>
+        <article class="education-item">
+          <h3>Padapada National High School</h3>
+          <p>Senior High School</p>
+          <span class="honors">Graduated with honors</span>
+        </article>
+        <article class="education-item">
+          <h3>University of the Cordillera</h3>
+          <p>Bachelor of Science in Information Technology · BSIT 1A</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="container content-section" id="skills">
+      <h2>Skills</h2>
+      <div class="skills-list">
+        <div class="skill-item">CSS</div>
+        <div class="skill-item">NC II</div>
+        <div class="skill-item">Cooperative</div>
+      </div>
+    </section>
+
+    <section class="container content-section" id="contact">
+      <h2>Contact</h2>
+      <div class="contact-list">
+        <div class="contact-item"><strong>Email</strong><a href="mailto:martineddyryan@gmail.com">martineddyryan@gmail.com</a></div>
+        <div class="contact-item"><strong>Phone</strong><a href="tel:+639705311281">0970 531 1281</a></div>
+        <div class="contact-item"><strong>Facebook</strong><span>Xinezd Xjnz</span></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container">Made by Edz-Ryan Martin · BSIT 1A</footer>
+
+  <script>
+    const photoInput = document.querySelector("#photo-upload");
+    const photoBox = document.querySelector(".photo-box");
+    const photoPreview = document.querySelector("#photo-preview");
+    let photoUrl;
+
+    photoInput.addEventListener("change", () => {
+      const file = photoInput.files && photoInput.files[0];
+      if (!file) return;
+      if (photoUrl) URL.revokeObjectURL(photoUrl);
+      photoUrl = URL.createObjectURL(file);
+      photoPreview.src = photoUrl;
+      photoBox.classList.add("has-image");
+    });
+  </script>
+</body>
+</html>
